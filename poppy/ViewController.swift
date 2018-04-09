@@ -6,19 +6,25 @@ import UIKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var drawButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     
     let configuration = ARWorldTrackingConfiguration()
+    var drawingColor = UIColor.white
+    var colors: [UIColor] = [UIColor.black, UIColor.lightGray ,UIColor.blue, UIColor.cyan, UIColor.yellow, UIColor.red, UIColor.magenta]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         sceneView.session.run(configuration)
         sceneView.delegate = self
         
         drawButton.layer.cornerRadius = drawButton.layer.frame.height / 2
+        resetButton.layer.cornerRadius = resetButton.layer.frame.height / 2
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,7 +43,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             if self.drawButton.isHighlighted {
                 let drawNode = SCNNode(geometry: SCNSphere(radius: 0.02))
                 drawNode.position = currentPositionOfCamera
-                drawNode.geometry?.firstMaterial?.diffuse.contents = UIColor.cyan
+                drawNode.geometry?.firstMaterial?.diffuse.contents = self.drawingColor
                 self.sceneView.scene.rootNode.addChildNode(drawNode)
                 print("draw being pressed")
             } else {
@@ -50,14 +56,42 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     }
                 })
                 
-                pointer.geometry?.firstMaterial?.diffuse.contents = UIColor.cyan
+                pointer.geometry?.firstMaterial?.diffuse.contents = self.drawingColor
                 self.sceneView.scene.rootNode.addChildNode(pointer)
             }
         }
     }
-
+    
+    @IBAction func resetPressed(_ sender: Any) {
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            node.removeFromParentNode()
+        }
+    }
 }
 
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
     return SCNVector3Make(left.x + right.x, left.y + right.y, left.z + right.z)
+}
+
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return colors.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "color", for: indexPath)
+        cell.backgroundColor = colors[indexPath.row]
+        cell.layer.cornerRadius = cell.layer.frame.height / 2
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        drawingColor = (cell?.backgroundColor!)!
+    }
 }

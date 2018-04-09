@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,14 +14,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="poppy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8yA-Xp-yLf">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAe-rR-Hvs">
-                                <rect key="frame" x="87.5" y="597" width="200" height="50"/>
+                                <rect key="frame" x="107" y="666" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.23921568630000001" green="0.86274509799999999" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="598-Wd-iOd"/>
@@ -32,20 +32,64 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMP-OD-9nl">
+                                <rect key="frame" x="20" y="666" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.50979275173611116" blue="0.60734049479166663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="KRY-R6-r7a"/>
+                                    <constraint firstAttribute="width" constant="50" id="eiJ-eX-LOE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SL2-9w-RbV"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MEH-qD-xCy">
+                                <rect key="frame" x="25" y="82" width="40" height="486"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="V5j-RW-xvw">
+                                    <size key="itemSize" width="40" height="40"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="color" id="6Zh-d5-NC2">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VAe-rR-Hvs" secondAttribute="bottom" constant="20" id="JME-Xb-OvQ"/>
+                            <constraint firstItem="MEH-qD-xCy" firstAttribute="leading" secondItem="vMP-OD-9nl" secondAttribute="leading" constant="5" id="JTw-Vc-wRN"/>
+                            <constraint firstItem="MEH-qD-xCy" firstAttribute="trailing" secondItem="vMP-OD-9nl" secondAttribute="trailing" constant="-5" id="Kn6-3G-bXF"/>
                             <constraint firstItem="8yA-Xp-yLf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="UbS-gI-pwW"/>
+                            <constraint firstItem="MEH-qD-xCy" firstAttribute="centerY" secondItem="8yA-Xp-yLf" secondAttribute="centerY" constant="-43" id="V7u-w9-qZ1"/>
                             <constraint firstItem="VAe-rR-Hvs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WfW-Er-YyY"/>
                             <constraint firstItem="8yA-Xp-yLf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Xx0-3P-BI2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8yA-Xp-yLf" secondAttribute="trailing" id="d4y-Nk-Gln"/>
+                            <constraint firstItem="vMP-OD-9nl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="g87-jF-0Ze"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vMP-OD-9nl" secondAttribute="bottom" constant="20" id="qLF-Ps-nFS"/>
+                            <constraint firstItem="MEH-qD-xCy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="62" id="rUI-Z4-nuF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8yA-Xp-yLf" secondAttribute="bottom" id="ywh-aV-xXf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="MEH-qD-xCy" id="2CD-yR-YNg"/>
                         <outlet property="drawButton" destination="VAe-rR-Hvs" id="E2C-9r-TZ0"/>
+                        <outlet property="resetButton" destination="vMP-OD-9nl" id="OjV-VF-GYw"/>
                         <outlet property="sceneView" destination="8yA-Xp-yLf" id="DdA-hr-ZFt"/>
                     </connections>
                 </viewController>
