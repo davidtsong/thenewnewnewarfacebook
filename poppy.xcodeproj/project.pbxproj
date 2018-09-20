@@ -10,9 +10,9 @@
 		AC1624B2207A74560051DBB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1624B1207A74560051DBB3 /* AppDelegate.swift */; };
 		AC1624B4207A74560051DBB3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1624B3207A74560051DBB3 /* ViewController.swift */; };
 		AC1624B7207A74560051DBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC1624B5207A74560051DBB3 /* Main.storyboard */; };
-		AC1624B9207A74570051DBB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC1624B8207A74570051DBB3 /* Assets.xcassets */; };
 		AC1624BC207A74570051DBB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC1624BA207A74570051DBB3 /* LaunchScreen.storyboard */; };
 		AC203AD1207C1BAE00D44EA4 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC203AD0207C1BAE00D44EA4 /* ColorCell.swift */; };
+		AC7FDFC720E317CA00E8DFB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC7FDFC620E317CA00E8DFB8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +20,10 @@
 		AC1624B1207A74560051DBB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC1624B3207A74560051DBB3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AC1624B6207A74560051DBB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AC1624B8207A74570051DBB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC1624BB207A74570051DBB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC1624BD207A74570051DBB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC203AD0207C1BAE00D44EA4 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		AC7FDFC620E317CA00E8DFB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +56,10 @@
 		AC1624B0207A74560051DBB3 /* poppy */ = {
 			isa = PBXGroup;
 			children = (
+				AC7FDFC620E317CA00E8DFB8 /* Assets.xcassets */,
 				AC1624B1207A74560051DBB3 /* AppDelegate.swift */,
 				AC1624B3207A74560051DBB3 /* ViewController.swift */,
 				AC1624B5207A74560051DBB3 /* Main.storyboard */,
-				AC1624B8207A74570051DBB3 /* Assets.xcassets */,
 				AC1624BA207A74570051DBB3 /* LaunchScreen.storyboard */,
 				AC1624BD207A74570051DBB3 /* Info.plist */,
 				AC203AD0207C1BAE00D44EA4 /* ColorCell.swift */,
@@ -126,7 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC1624BC207A74570051DBB3 /* LaunchScreen.storyboard in Resources */,
-				AC1624B9207A74570051DBB3 /* Assets.xcassets in Resources */,
+				AC7FDFC720E317CA00E8DFB8 /* Assets.xcassets in Resources */,
 				AC1624B7207A74560051DBB3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +291,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.b0rnbklyn.poppy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b0rnbklyn.scribbles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -309,7 +309,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.b0rnbklyn.poppy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.b0rnbklyn.scribbles;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
