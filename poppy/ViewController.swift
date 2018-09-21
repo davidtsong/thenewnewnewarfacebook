@@ -95,8 +95,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func toggleFlashlight(_ sender: Any) {
         if flashlightOn {
             toggleFlashlight(on: false )
+            flashlightOn = false
         } else {
             toggleFlashlight(on: true )
+            flashlightOn = true
         }
     }
 }
