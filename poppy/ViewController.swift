@@ -15,6 +15,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var drawingColor = UIColor.white
     var colors: [UIColor] = [UIColor.black, UIColor.lightGray ,UIColor.blue, UIColor.cyan, UIColor.yellow, UIColor.red, UIColor.magenta]
     
+    var flashlightOn: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.session.run(configuration)
@@ -62,9 +64,39 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    func toggleFlashlight(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if on == true {
+                    device.torchMode = .on
+                } else {
+                    device.torchMode = .off
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used :(")
+            }
+        } else {
+            print("Torch is not available :O")
+        }
+    }
+    
     @IBAction func resetPressed(_ sender: Any) {
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
             node.removeFromParentNode()
+        }
+    }
+    
+    @IBAction func toggleFlashlight(_ sender: Any) {
+        if flashlightOn {
+            toggleFlashlight(on: false )
+        } else {
+            toggleFlashlight(on: true )
         }
     }
 }
