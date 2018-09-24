@@ -64,6 +64,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    @IBAction func snapPhoto(_ sender: Any) {
+        
+    }
+    
     func toggleFlashlight(on: Bool) {
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         
@@ -86,12 +90,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    @IBAction func resetPressed(_ sender: Any) {
-        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
-            node.removeFromParentNode()
-        }
-    }
-    
     @IBAction func toggleFlashlight(_ sender: Any) {
         if flashlightOn {
             toggleFlashlight(on: false )
@@ -99,6 +97,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         } else {
             toggleFlashlight(on: true )
             flashlightOn = true
+        }
+    }
+    
+    @IBAction func resetPressed(_ sender: Any) {
+        self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
+            node.removeFromParentNode()
         }
     }
 }
