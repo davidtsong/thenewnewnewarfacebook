@@ -3,23 +3,28 @@
 
 import ARKit
 import UIKit
+import SceneKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate
+{
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var drawButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var loadButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var snapshotThumbnail: UIImageView!
+
     
-    let configuration = ARWorldTrackingConfiguration()
     var drawingColor = UIColor.white
-    var colors: [UIColor] = [UIColor.black, UIColor.lightGray ,UIColor.blue, UIColor.cyan, UIColor.yellow, UIColor.red, UIColor.magenta]
+    var colors: [UIColor] = [UIColor.black, UIColor.white ,UIColor.blue, UIColor.cyan, UIColor.yellow, UIColor.red, UIColor.magenta]
     
-    var flashlightOn: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sceneView.session.run(configuration)
+        
+        sceneView.session.run(defaultConfiguration)
         sceneView.delegate = self
         
         drawButton.layer.cornerRadius = drawButton.layer.frame.height / 2
@@ -27,6 +32,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+
+        if mapDataFromFile == nil{
+            self.loadButton.isHidden = true
+        }
+        snapshotThumbnail.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,7 +46,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
+    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval)
+    {
         guard let pointOfView = sceneView.pointOfView else { return }
         let transform = pointOfView.transform
         let orientation = SCNVector3(-transform.m31,-transform.m32,-transform.m33)
@@ -47,6 +60,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 drawNode.position = currentPositionOfCamera
                 drawNode.geometry?.firstMaterial?.diffuse.contents = self.drawingColor
                 self.sceneView.scene.rootNode.addChildNode(drawNode)
+                let  virtualObjectAnchor = ARAnchor(name: String(describing: self.drawingColor), transform: simd_float4x4(drawNode.worldTransform))
+                self.sceneView.session.add(anchor:virtualObjectAnchor)
+                
                 print("draw being pressed")
             } else {
                 let pointer = SCNNode(geometry: SCNBox(width: 0.01, height: 0.01, length: 0.01, chamferRadius: 0.01/2))
@@ -57,18 +73,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                         node.removeFromParentNode()
                     }
                 })
-                
                 pointer.geometry?.firstMaterial?.diffuse.contents = self.drawingColor
                 self.sceneView.scene.rootNode.addChildNode(pointer)
             }
         }
     }
     
-    @IBAction func snapPhoto(_ sender: Any) {
+    @IBAction func snapPhoto(_ sender: Any)
+    {
         
     }
     
-    func toggleFlashlight(on: Bool) {
+    func toggleFlashlight(on: Bool)
+    {
         guard let device = AVCaptureDevice.default(for: .video) else { return }
         
         if device.hasTorch {
@@ -90,21 +107,132 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    @IBAction func toggleFlashlight(_ sender: Any) {
-        if flashlightOn {
-            toggleFlashlight(on: false )
-            flashlightOn = false
-        } else {
-            toggleFlashlight(on: true )
-            flashlightOn = true
-        }
-    }
-    
     @IBAction func resetPressed(_ sender: Any) {
         self.sceneView.scene.rootNode.enumerateChildNodes { (node, _) in
             node.removeFromParentNode()
         }
     }
+    @IBAction func savePressed(_ sender: Any)
+    {
+        if #available(iOS 12.0, *) {
+            sceneView.session.getCurrentWorldMap { worldMap, error in
+                guard let map = worldMap
+                    else {
+                        self.showAlert(title: "Can't get current world map", message: error!.localizedDescription);
+                        print("Can't get the current world map")
+                        return
+                }
+                
+                // Add a snapshot image indicating where the map was captured.
+                guard let snapshotAnchor = SnapshotAnchor(capturing: self.sceneView)
+                    else {
+                        print("Can't take snapshot")
+                        fatalError("Can't take snapshot")
+                    }
+                map.anchors.append(snapshotAnchor)
+                
+                do {
+                    let data = try NSKeyedArchiver.archivedData(withRootObject: map, requiringSecureCoding: true)
+                    try data.write(to: self.mapSaveURL, options: [.atomic])
+                    DispatchQueue.main.async {
+                        self.loadButton.isHidden = false
+                        self.loadButton.isEnabled = true
+                    }
+                } catch {
+                    print("Can't save map: \(error.localizedDescription)")
+                    fatalError("Can't save map: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    @IBAction func loadPressed(_ sender: Any)
+    {
+        let worldMap: ARWorldMap = {
+            guard let data = mapDataFromFile
+                else {
+                    print("Map data should already be verified to exist before Load button is enabled.")
+                    fatalError("Map data should already be verified to exist before Load button is enabled.")
+            }
+            do {
+                guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: data)
+                    else { print("Map data should already be verified to exist before Load button is enabled.")
+                        fatalError("No ARWorldMap in archive.") }
+            
+                return worldMap
+            } catch {
+                print("Can't unarchive ARWorldMap from file data: \(error)")
+                fatalError("Can't unarchive ARWorldMap from file data: \(error)")
+            }
+        }()
+        
+        // Display the snapshot image stored in the world map to aid user in relocalizing.
+        snapshotThumbnail.isHidden = false
+        if let snapshotData = worldMap.snapshotAnchor?.imageData,
+            let snapshot = UIImage(data: snapshotData) {
+            self.snapshotThumbnail.image = snapshot
+        } else {
+            print("No snapshot image in world map")
+        }
+        // Remove the snapshot anchor from the world map since we do not need it in the scene.
+        worldMap.anchors.removeAll(where: { $0 is SnapshotAnchor })
+        
+        let configuration = self.defaultConfiguration // this app's standard world tracking settings
+        configuration.initialWorldMap = worldMap
+        print("Finished loading in a map and is....")
+        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+        
+//        let drawNode = SCNNode(geometry: SCNSphere(radius: 0.02))
+//        drawNode.position = currentPositionOfCamera
+//        drawNode.geometry?.firstMaterial?.diffuse.contents = self.drawingColor
+//        self.sceneView.scene.rootNode.addChildNode(drawNode)
+//        let  virtualObjectAnchor = ARAnchor(name: "dot", transform: simd_float4x4(drawNode.worldTransform))
+//        self.sceneView.session.add(anchor:virtualObjectAnchor)
+        
+       for anchor in worldMap.anchors {
+            let drawNode = SCNNode(geometry: SCNSphere(radius: 0.02))
+            let color:String = anchor.name ?? "<#default value#>"
+            let colorString = color.components(separatedBy: " ")
+//            drawNode.position = SCNMatrix4ToMat4(anchor.transform).position()
+            drawNode.position = matrix_float4x4(anchor.transform).position()
+            drawNode.geometry?.firstMaterial?.diffuse.contents = self.drawingColor
+//            drawNode.geometry?.firstMaterial?.diffuse.contents = UIColor(red: colorString[1].FloatValue()!, green:colorString[2].FloatValue()!, blue:colorString[3].FloatValue()!, alpha: colorString[4].FloatValue()!)
+            self.sceneView.scene.rootNode.addChildNode(drawNode)
+        }
+        
+//        let drawNode = SCNNode(geometry: SCNSphere(radius: 0.02))
+//        drawNode.position = currentPositionOfCamera
+//        drawNode.geometry?.firstMaterial?.diffuse.contents = self.drawingColor
+//        self.sceneView.scene.rootNode.addChildNode(drawNode)
+        
+        
+//        virtualObjectAnchor = nil
+    }
+    
+    var defaultConfiguration: ARWorldTrackingConfiguration {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = [.horizontal, .vertical]
+        configuration.environmentTexturing = .automatic
+        return configuration
+    }
+    
+    var mapDataFromFile: Data? {
+        return try? Data(contentsOf: mapSaveURL)
+    }
+    
+    lazy var mapSaveURL: URL = {
+        do {
+            return try FileManager.default
+                .url(for: .documentDirectory,
+                     in: .userDomainMask,
+                     appropriateFor: nil,
+                     create: true)
+                .appendingPathComponent("map.arexperience")
+        } catch {
+            fatalError("Can't get file save URL: \(error.localizedDescription)")
+        }
+    }()
 }
 
 func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
@@ -112,7 +240,8 @@ func +(left: SCNVector3, right: SCNVector3) -> SCNVector3 {
 }
 
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource
+{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -133,3 +262,20 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         drawingColor = (cell?.backgroundColor!)!
     }
 }
+extension matrix_float4x4 {
+    func position() -> SCNVector3 {
+        return SCNVector3(columns.3.x, columns.3.y, columns.3.z)
+    }
+}
+
+extension String {
+    
+    func FloatValue() -> CGFloat? {
+        guard let doubleValue = Double(self) else {
+            return nil
+        }
+        
+        return CGFloat(doubleValue)
+    }
+}
+

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,29 +18,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="hzR-LH-FvX">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="surreallogo" translatesAutoresizingMaskIntoConstraints="NO" id="hzR-LH-FvX">
+                                <rect key="frame" x="128" y="305" width="119" height="57"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="IZy-KM-yZv"/>
                                     <constraint firstAttribute="height" constant="128" id="LCs-Ve-6hB"/>
                                     <constraint firstAttribute="width" constant="240" id="cFF-fy-cRw"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="zxs-xW-Y4z"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.31372549019607843" green="0.92156862745098034" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hzR-LH-FvX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="AnD-1h-3bt"/>
+                            <constraint firstItem="hzR-LH-FvX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="KdF-Xs-LEw"/>
                             <constraint firstItem="hzR-LH-FvX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Np8-8O-eCW"/>
+                            <constraint firstItem="hzR-LH-FvX" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Nzg-zd-p8R"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hzR-LH-FvX" secondAttribute="trailing" constant="128" id="XD8-Wz-Vhm"/>
+                            <constraint firstItem="hzR-LH-FvX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZOL-sn-OeC"/>
+                            <constraint firstItem="hzR-LH-FvX" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="e1k-aC-0Iu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="1000" height="1000"/>
+        <image name="surreallogo" width="245.75999450683594" height="261.60000610351562"/>
     </resources>
 </document>

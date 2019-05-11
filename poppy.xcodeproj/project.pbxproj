@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2DF9EA1D2223E3D30010F67C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DF9EA1C2223E3D30010F67C /* Assets.xcassets */; };
+		632647BF2227331600B11C20 /* SixDegreesSDK.plist in Resources */ = {isa = PBXBuildFile; fileRef = 632647BE2227331600B11C20 /* SixDegreesSDK.plist */; };
+		632647C5222744BB00B11C20 /* SnapshotAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632647C4222744BA00B11C20 /* SnapshotAnchor.swift */; };
+		632647C7222744D400B11C20 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632647C6222744D400B11C20 /* Utilities.swift */; };
 		AC1624B2207A74560051DBB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1624B1207A74560051DBB3 /* AppDelegate.swift */; };
 		AC1624B4207A74560051DBB3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1624B3207A74560051DBB3 /* ViewController.swift */; };
 		AC1624B7207A74560051DBB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC1624B5207A74560051DBB3 /* Main.storyboard */; };
 		AC1624BC207A74570051DBB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC1624BA207A74570051DBB3 /* LaunchScreen.storyboard */; };
 		AC203AD1207C1BAE00D44EA4 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC203AD0207C1BAE00D44EA4 /* ColorCell.swift */; };
-		AC7FDFC720E317CA00E8DFB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC7FDFC620E317CA00E8DFB8 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DF9EA1C2223E3D30010F67C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		632647BE2227331600B11C20 /* SixDegreesSDK.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SixDegreesSDK.plist; sourceTree = "<group>"; };
+		632647C4222744BA00B11C20 /* SnapshotAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotAnchor.swift; sourceTree = "<group>"; };
+		632647C6222744D400B11C20 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		AC1624AE207A74560051DBB3 /* poppy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = poppy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC1624B1207A74560051DBB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC1624B3207A74560051DBB3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -23,7 +30,6 @@
 		AC1624BB207A74570051DBB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AC1624BD207A74570051DBB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC203AD0207C1BAE00D44EA4 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
-		AC7FDFC620E317CA00E8DFB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +62,16 @@
 		AC1624B0207A74560051DBB3 /* poppy */ = {
 			isa = PBXGroup;
 			children = (
-				AC7FDFC620E317CA00E8DFB8 /* Assets.xcassets */,
+				2DF9EA1C2223E3D30010F67C /* Assets.xcassets */,
 				AC1624B1207A74560051DBB3 /* AppDelegate.swift */,
+				632647C4222744BA00B11C20 /* SnapshotAnchor.swift */,
 				AC1624B3207A74560051DBB3 /* ViewController.swift */,
+				632647C6222744D400B11C20 /* Utilities.swift */,
 				AC1624B5207A74560051DBB3 /* Main.storyboard */,
 				AC1624BA207A74570051DBB3 /* LaunchScreen.storyboard */,
 				AC1624BD207A74570051DBB3 /* Info.plist */,
 				AC203AD0207C1BAE00D44EA4 /* ColorCell.swift */,
+				632647BE2227331600B11C20 /* SixDegreesSDK.plist */,
 			);
 			path = poppy;
 			sourceTree = "<group>";
@@ -126,7 +135,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC1624BC207A74570051DBB3 /* LaunchScreen.storyboard in Resources */,
-				AC7FDFC720E317CA00E8DFB8 /* Assets.xcassets in Resources */,
+				2DF9EA1D2223E3D30010F67C /* Assets.xcassets in Resources */,
+				632647BF2227331600B11C20 /* SixDegreesSDK.plist in Resources */,
 				AC1624B7207A74560051DBB3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +150,8 @@
 			files = (
 				AC1624B4207A74560051DBB3 /* ViewController.swift in Sources */,
 				AC1624B2207A74560051DBB3 /* AppDelegate.swift in Sources */,
+				632647C5222744BB00B11C20 /* SnapshotAnchor.swift in Sources */,
+				632647C7222744D400B11C20 /* Utilities.swift in Sources */,
 				AC203AD1207C1BAE00D44EA4 /* ColorCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,7 +229,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -271,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -284,15 +296,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G87HUM96UL;
+				DEVELOPMENT_TEAM = S6RA263GKC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/poppy",
+				);
 				INFOPLIST_FILE = poppy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.b0rnbklyn.scribbles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.surrealAR.surrealr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -302,15 +320,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G87HUM96UL;
+				DEVELOPMENT_TEAM = S6RA263GKC;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/poppy",
+				);
 				INFOPLIST_FILE = poppy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.b0rnbklyn.scribbles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.surrealAR.surrealr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
